@@ -4,16 +4,16 @@
 * Data types: int, decimal, number, vector et al
 
 ## Vector
-** A vector of like objects
-** is.atomic
-** is.vector == TRUE
-** is.list == FALSE
+  * A vector of like objects
+  * is.atomic
+  * is.vector == TRUE
+  * is.list == FALSE
 
 ##List:
-** A bag of unlike objects
-** NOT is.atomic
-** is.vector == TRUE
-** is.list == TRUE
+  * A bag of unlike objects
+  * NOT is.atomic
+  * is.vector == TRUE
+  * is.list == TRUE
 
 * All numeric datatypes are Number unless specified with nL (100L) for integer
 * Creating a list/vector “x<-c(1, ‘abc', 55);”, element of 3 with different elements in the list/vector; Do NOT use double quotes
@@ -21,22 +21,22 @@
 * Create a list with a sequence “x<-1:20”'
 * Casting is done by doing as.numeric(x) or as.logical(x) or as.character(x)
 * '''m<-matrix(1:6, nrow=2, ncol=3); dim (m) OR attributes(m) — shows dimensions'''
-** matrix with column & row binding — cbind and rbind
-** x<-1:3; y<-10:12; cbind(x,y)
-** rbind(x,y) 
+  * matrix with column & row binding — cbind and rbind
+  * x<-1:3; y<-10:12; cbind(x,y)
+  * rbind(x,y) 
 
 * x <- list(1,”a”, TRUE, 1 + 4i) — creates a list of objects (more like a bag)
 * Factors are used for representing categorical data. x<- factor(c('yes','no','yes','no','no'),levels=c('yes','no'))
-** To obtain numerical data do unclass(x)
+  * To obtain numerical data do unclass(x)
 
 * is.na() vs is.nan()
 * data frames are tables for data;  Elements of the column have the same length;
 
-** data frames have row.names
-** Data Frames are usually created by calling read.table() or read.csv()
-** Can be converted to a matrix by calling data.matrix()
-** x<-data.frame(foo=1:4, bar=c(T,T,F,F))
-** nrow(x) = 4 and ncol(x) = 2
+  * data frames have row.names
+  * Data Frames are usually created by calling read.table() or read.csv()
+  * Can be converted to a matrix by calling data.matrix()
+  * x<-data.frame(foo=1:4, bar=c(T,T,F,F))
+  * nrow(x) = 4 and ncol(x) = 2
 
 * Vector can have names x<-1:2; names(x)<-c(‘one’,’two’,’three’);
 * List can have names
@@ -45,9 +45,9 @@
 
 # Subsetting
 * [ is for extracting from an object
-** x[1]; x[1:4]; x[x > ’a’]; u<- x > ‘a’, x[u] — get all the elements that have TRUE  in u
+  * x[1]; x[1:4]; x[x > ’a’]; u<- x > ‘a’, x[u] — get all the elements that have TRUE  in u
 * [[ is used for a matrix
-** x[1,2], x[,1]
+  * x[1,2], x[,1]
 * $ is extracting with name
 * Print first two rows x[1:2,]
 * x$Ozone[is.na(x$Ozone)] — selecting column that is NA
@@ -71,18 +71,18 @@ Reading data into R
 * write.table, writeLines, dump, dput, save, serialize
 * read.table
 
-** file, the name of a file, or a connection
-** header, logical indicating if the file has a header line
-** sep, a string indicating how the columns are separated
-** colClasses, a character vector indicating the class of each column in the dataset · nrows, the number of rows in the dataset
-** comment.char, a character string indicating the comment character
-** skip, the number of lines to skip from the beginning
-** stringsAsFactors, should character variables be coded as factors?
+  * file, the name of a file, or a connection
+  * header, logical indicating if the file has a header line
+  * sep, a string indicating how the columns are separated
+  * colClasses, a character vector indicating the class of each column in the dataset · nrows, the number of rows in the dataset
+  * comment.char, a character string indicating the comment character
+  * skip, the number of lines to skip from the beginning
+  * stringsAsFactors, should character variables be coded as factors?
 
 * Efficient read.table
 
-** initial <- read.table("datatable.txt", nrows = 100) classes <- sapply(initial, class)
-** tabAll <- read.table("datatable.txt",colClasses = classes)
+  * initial <- read.table("datatable.txt", nrows = 100) classes <- sapply(initial, class)
+  * tabAll <- read.table("datatable.txt",colClasses = classes)
 
 
 
@@ -90,7 +90,7 @@ Reading data into R
 * dput(trees) or dput(trees, files=‘trees.R’) # efficient way for recreating
 * dump is dput for multiple objects
 
-** dump(c(‘x’,’y’), file=‘x_y.R’)
+  * dump(c(‘x’,’y’), file=‘x_y.R’)
 
 * fiel opens a file
 * gzfile opens a compressed gzip
@@ -140,15 +140,15 @@ ls(environment(fun1)) — This will tell the variables used inside function fun1
 
 * apply is used for doing the same operation to the margins of the matrix
 
-** m<-matrix(c(1:9),nrow=3,ncol=3) # create a 3x3 matrix
-** Apply takes three parameters, 
+  * m<-matrix(c(1:9),nrow=3,ncol=3) # create a 3x3 matrix
+  * Apply takes three parameters, 
 
     * M — matrix
     * margin — 1 column wise & 2 row wise
     * function that needs to be applied
 
-** apply(m,1,mean)  # mean column wise
-** apply(m,2,function(x) x^2)  # square all the elements, row wise; 
+  * apply(m,1,mean)  # mean column wise
+  * apply(m,2,function(x) x^2)  # square all the elements, row wise; 
 
 * lapply & sapply is used for doing the same operation on every element of a list
 ```R
@@ -171,15 +171,15 @@ tapply(x,f2,mean)   # calculate mean for each group
 * split takes a vector or other objects and splits it into groups determined by a factor or list of factors
 
 
-** split(x,f,drop=FALSE,…)
-** x is a Vector
-** f is factor or list of factors
-** drop indicates whether empty factors levels should be dropped
-** x <- c(rnorm(10), runif(10), rnorm(10, 1))
-** f<-gl(3,10) # creates a vector with 10 of 1, 10 of 2 and 10 of 3
-** split(x,f)  # splits the list x into 3 parts with first 10 values in one, second 10 in another and so on
-** lapply(split(x,f), mean) # calculate means on those
-** combination of lapply and split can be used as “GROUP BY” in SQL
+  * split(x,f,drop=FALSE,…)
+  * x is a Vector
+  * f is factor or list of factors
+  * drop indicates whether empty factors levels should be dropped
+  * x <- c(rnorm(10), runif(10), rnorm(10, 1))
+  * f<-gl(3,10) # creates a vector with 10 of 1, 10 of 2 and 10 of 3
+  * split(x,f)  # splits the list x into 3 parts with first 10 values in one, second 10 in another and so on
+  * lapply(split(x,f), mean) # calculate means on those
+  * combination of lapply and split can be used as “GROUP BY” in SQL
 ```R
 library(datasets)
 head(air quality)
@@ -190,8 +190,8 @@ s<-split(airquality,airquality$Month)
 sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")]))
 # print the value mean of Ozone, Solar.R and Wind; Exclude NA values
 sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")], na.rm = TRUE))
-** To have more than one variable in group by
-** # For grouping by multiple columns you can use list
+  * To have more than one variable in group by
+  * # For grouping by multiple columns you can use list
 # eg: If there is a factor Male/Female & another factor Month
 x<-rnorm(10)   # simulating readings
 gender<-gl(2,5)
@@ -206,9 +206,9 @@ str(split(x,list(gender,month),drop=TRUE))
 
 * mapply is a multivariate apply of sorts which applies to a function in parallel over a set of arguments
 
-** list(rep(1, 4), rep(2, 3), rep(3, 2), rep(4, 1))
-** # functionally same
-** mapply(rep, 1:4, 4:1)
+  * list(rep(1, 4), rep(2, 3), rep(3, 2), rep(4, 1))
+  * # functionally same
+  * mapply(rep, 1:4, 4:1)
 
 
 
