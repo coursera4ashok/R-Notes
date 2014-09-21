@@ -3,13 +3,13 @@
 * help.search(‘mean’) OR ?mean — to get help on mean
 * Data types: int, decimal, number, vector et al
 
-### Vector
+## Vector
 ** A vector of like objects
 ** is.atomic
 ** is.vector == TRUE
 ** is.list == FALSE
 
-###List:
+##List:
 ** A bag of unlike objects
 ** NOT is.atomic
 ** is.vector == TRUE
@@ -107,7 +107,7 @@ vector is an associative array.   Index can be number or character.
 seq_len(5) —> creates a sequence 
 next — similar to continue
 
-Functions:
+##Functions:
 formals(function_name) — describes arguments of a function
 args(function_name) — prints all the arguments;  a better method
 Return value is the last expression in the function.
@@ -115,7 +115,7 @@ f<-function(a,b=1,c=TRUE){ … } — function name is ‘f’
 ls(environment(fun1)) — This will tell the variables used inside function fun1
 
 
-Date:
+#Date:
 
 
 * as.Date
@@ -127,7 +127,7 @@ Date:
 * unclass(p)
 
 
-apply, lapply, sapply
+#apply, lapply, sapply
 
 
 * lapply: Loop over a list and evaluate a function on each element · sapply: Same as lapply but try to simplify the result
@@ -143,33 +143,31 @@ apply, lapply, sapply
 ** m<-matrix(c(1:9),nrow=3,ncol=3) # create a 3x3 matrix
 ** Apply takes three parameters, 
 
-         * M — matrix
-         * margin — 1 column wise & 2 row wise
-         * function that needs to be applied
+    * M — matrix
+    * margin — 1 column wise & 2 row wise
+    * function that needs to be applied
 
 ** apply(m,1,mean)  # mean column wise
 ** apply(m,2,function(x) x^2)  # square all the elements, row wise; 
 
 * lapply & sapply is used for doing the same operation on every element of a list
+```R
+l <- c(1:9) # create a vector of 1 to 9
+lapply(l, function(x) x^2) # squaring all the elements of the vector
+# sapply behaves the same way as lapply but prints better
+x <- list(a = 1:4, b = rnorm(10), c = rnorm(20, 1), d = rnorm(100, 5))
+lapply(x,mean) # prints the mean of a, b, c, d
+sapply(x, mean) # prints it well
+x <- list(a = matrix(1:4, 2, 2), b = matrix(1:6, 3, 2))
+lapply(x,function(e) e[,1]) # Anonymous function for extracting the first column
 
-** l <- c(1:9) # create a vector of 1 to 9
-** lapply(l, function(x) x^2) # squaring all the elements of the vector
-** sapply behaves the same way as lapply but prints better
-** x <- list(a = 1:4, b = rnorm(10), c = rnorm(20, 1), d = rnorm(100, 5))
-** lapply(x,mean) # prints the mean of a, b, c, d
-** sapply(x, mean) # prints it well
-** x <- list(a = matrix(1:4, 2, 2), b = matrix(1:6, 3, 2))
-** lapply(x,function(e) e[,1]) # Anonymous function for extracting the first column
-
-* tapply is used to apply a function over subsets of a vector
-
-
-** x <- c(rnorm(10), runif(10), rnorm(10, 1))
-** f<-gl(3,10)   # create 3 groups of 10, Level 1, 2 & 3
-** tapply(x, f, mean)  # calculate mean for each group
-** f2<-int.rep(1:3,10) # creates 3 groups of 1,2,3
-** tapply(x,f2,mean)   # calculate mean for each group
-
+# tapply is used to apply a function over subsets of a vector
+x <- c(rnorm(10), runif(10), rnorm(10, 1))
+f<-gl(3,10)   # create 3 groups of 10, Level 1, 2 & 3
+tapply(x, f, mean)  # calculate mean for each group
+f2<-int.rep(1:3,10) # creates 3 groups of 1,2,3
+tapply(x,f2,mean)   # calculate mean for each group
+```
 * split takes a vector or other objects and splits it into groups determined by a factor or list of factors
 
 
@@ -182,7 +180,8 @@ apply, lapply, sapply
 ** split(x,f)  # splits the list x into 3 parts with first 10 values in one, second 10 in another and so on
 ** lapply(split(x,f), mean) # calculate means on those
 ** combination of lapply and split can be used as “GROUP BY” in SQL
-** library(datasets)
+```R
+library(datasets)
 head(air quality)
 # Group values by month
 s<-split(airquality,airquality$Month)
@@ -203,6 +202,7 @@ str(split(x,list(gender,month)))   # has empty rows
 # drop empty rows
 str(split(x,list(gender,month),drop=TRUE))
 # in the printed value, 1.1 means Male & Month ()
+```
 
 * mapply is a multivariate apply of sorts which applies to a function in parallel over a set of arguments
 
@@ -212,7 +212,7 @@ str(split(x,list(gender,month),drop=TRUE))
 
 
 
-Debugging
+#Debugging
 
 
 * invisible(x) # do not print the value of x even if the function returns x
