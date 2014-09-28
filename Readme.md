@@ -59,9 +59,7 @@
 * max(y$Ozone[!is.na(y$Ozone)]) — max of ozone
 
 
-Reading data into R
-
-
+## Reading data into R
 * read.table, read.csv
 * readLines
 * source — reading R code files (inverse of dump)
@@ -70,7 +68,6 @@ Reading data into R
 * unsearialize, for reading R objects in binary form
 * write.table, writeLines, dump, dput, save, serialize
 * read.table
-
   * file, the name of a file, or a connection
   * header, logical indicating if the file has a header line
   * sep, a string indicating how the columns are separated
@@ -80,19 +77,14 @@ Reading data into R
   * stringsAsFactors, should character variables be coded as factors?
 
 * Efficient read.table
-
   * initial <- read.table("datatable.txt", nrows = 100) classes <- sapply(initial, class)
   * tabAll <- read.table("datatable.txt",colClasses = classes)
 
-
-
-
 * dput(trees) or dput(trees, files=‘trees.R’) # efficient way for recreating
 * dump is dput for multiple objects
-
   * dump(c(‘x’,’y’), file=‘x_y.R’)
 
-* fiel opens a file
+* file opens a file
 * gzfile opens a compressed gzip
 * bzfile
 * url opens a connection to a webpage
@@ -131,25 +123,17 @@ ls(environment(fun1)) — This will tell the variables used inside function fun1
 
 
 * lapply: Loop over a list and evaluate a function on each element · sapply: Same as lapply but try to simplify the result
-
 * apply: Apply a function over the margins of an array
-
 * tapply: Apply a function over subsets of a vector
-
 * mapply: Multivariate version of lapply
-
 * apply is used for doing the same operation to the margins of the matrix
-
   * m<-matrix(c(1:9),nrow=3,ncol=3) # create a 3x3 matrix
   * Apply takes three parameters, 
-
     * M — matrix
     * margin — 1 column wise & 2 row wise
     * function that needs to be applied
-
   * apply(m,1,mean)  # mean column wise
   * apply(m,2,function(x) x^2)  # square all the elements, row wise; 
-
 * lapply & sapply is used for doing the same operation on every element of a list
 ```R
 l <- c(1:9) # create a vector of 1 to 9
@@ -190,8 +174,10 @@ s<-split(airquality,airquality$Month)
 sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")]))
 # print the value mean of Ozone, Solar.R and Wind; Exclude NA values
 sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")], na.rm = TRUE))
+```
   * To have more than one variable in group by
-  * # For grouping by multiple columns you can use list
+```R
+# For grouping by multiple columns you can use list
 # eg: If there is a factor Male/Female & another factor Month
 x<-rnorm(10)   # simulating readings
 gender<-gl(2,5)
@@ -203,13 +189,12 @@ str(split(x,list(gender,month)))   # has empty rows
 str(split(x,list(gender,month),drop=TRUE))
 # in the printed value, 1.1 means Male & Month ()
 ```
-
 * mapply is a multivariate apply of sorts which applies to a function in parallel over a set of arguments
-
-  * list(rep(1, 4), rep(2, 3), rep(3, 2), rep(4, 1))
-  * # functionally same
-  * mapply(rep, 1:4, 4:1)
-
+```R
+list(rep(1, 4), rep(2, 3), rep(3, 2), rep(4, 1))
+# functionally same
+* mapply(rep, 1:4, 4:1)
+```
 
 
 #Debugging
@@ -225,10 +210,36 @@ str(split(x,list(gender,month),drop=TRUE))
 * lm(x - y) # this will stop in lm and show the code in the browser
 
 
+#STR
+* str function on any data gives very informative output
+* summary function is another that outputs statistically
 
+# Random number generation
+``` rnorm(n=number of observations,mean,sd) ```
+* The numbers are pseudo random.  The numbers can be recreated by setting the seed.
+```
+# This will yield the same 5 ranom numbers every time
+set.seed(1)
+rrand(5,10)
+```
+* poisson's distribution
+```
+rpois(n=number of random values,lambda=vector of (non-negative) means)
+```
+* random sampling
+```
+sample(1:100,5)
+sample(letters,5)
+```
 
-
-
+##Profiling
+* system.time is quite handy
+```R
+system.time(function);
+system.time({
+...
+});
+```
 
 https://github.com/edj-boston/coursera-r-programming/blob/master/week-02/quiz.md
 
