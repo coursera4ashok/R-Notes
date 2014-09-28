@@ -37,7 +37,6 @@
   * Can be converted to a matrix by calling data.matrix()
   * x<-data.frame(foo=1:4, bar=c(T,T,F,F))
   * nrow(x) = 4 and ncol(x) = 2
-
 * Vector can have names x<-1:2; names(x)<-c(‘one’,’two’,’three’);
 * List can have names
 * matrices can have names as well called dimnames.   dimnames(m)<-list(c(‘a’,’b’), c(‘c’,’d’))
@@ -51,11 +50,8 @@
 * $ is extracting with name
 * Print first two rows x[1:2,]
 * x$Ozone[is.na(x$Ozone)] — selecting column that is NA
-
 * mean(x$Ozone[!is.na(x$Ozone)]) — mean exclude NA
-
 * y<-subset(x,x$Ozone>31 & x$Temp>90) — Create a subset of a table with given conditions
-
 * max(y$Ozone[!is.na(y$Ozone)]) — max of ozone
 
 
@@ -100,24 +96,22 @@ seq_len(5) —> creates a sequence
 next — similar to continue
 
 ##Functions:
-formals(function_name) — describes arguments of a function
-args(function_name) — prints all the arguments;  a better method
-Return value is the last expression in the function.
-f<-function(a,b=1,c=TRUE){ … } — function name is ‘f’
-ls(environment(fun1)) — This will tell the variables used inside function fun1
-
+```R
+formals(function_name) # describes arguments of a function
+args(function_name)  # prints all the arguments;  a better method
+# Return value is the last expression in the function.
+f<-function(a,b=1,c=TRUE){ … } # function name is ‘f’
+ls(environment(fun1)) # This will tell the variables used inside function fun1
+```
 
 #Date:
 
-
-* as.Date
-
-* x<-Sys.time()
-
-* p<-as.POSIXlt(x)
-
-* unclass(p)
-
+```R
+as.Date
+x<-Sys.time()
+p<-as.POSIXlt(x)
+unclass(p)
+```
 
 #apply, lapply, sapply
 
@@ -132,8 +126,13 @@ ls(environment(fun1)) — This will tell the variables used inside function fun1
     * M — matrix
     * margin — 1 column wise & 2 row wise
     * function that needs to be applied
-  * apply(m,1,mean)  # mean column wise
-  * apply(m,2,function(x) x^2)  # square all the elements, row wise; 
+
+```R
+m<-matrix(c(1:9),nrow=3,ncol=3) # create a 3x3 matrix
+apply(m,1,mean)  # mean column wise
+apply(m,2,function(x) x^2)  # square all the elements, row wise; 
+```
+
 * lapply & sapply is used for doing the same operation on every element of a list
 ```R
 l <- c(1:9) # create a vector of 1 to 9
@@ -159,11 +158,13 @@ tapply(x,f2,mean)   # calculate mean for each group
   * x is a Vector
   * f is factor or list of factors
   * drop indicates whether empty factors levels should be dropped
-  * x <- c(rnorm(10), runif(10), rnorm(10, 1))
-  * f<-gl(3,10) # creates a vector with 10 of 1, 10 of 2 and 10 of 3
-  * split(x,f)  # splits the list x into 3 parts with first 10 values in one, second 10 in another and so on
-  * lapply(split(x,f), mean) # calculate means on those
-  * combination of lapply and split can be used as “GROUP BY” in SQL
+```R
+x <- c(rnorm(10), runif(10), rnorm(10, 1))
+f<-gl(3,10) # creates a vector with 10 of 1, 10 of 2 and 10 of 3
+split(x,f)  # splits the list x into 3 parts with first 10 values in one, second 10 in another and so on
+lapply(split(x,f), mean) # calculate means on those
+```
+### combination of lapply and split can be used as “GROUP BY” in SQL
 ```R
 library(datasets)
 head(air quality)
